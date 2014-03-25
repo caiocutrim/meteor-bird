@@ -1,0 +1,5 @@
+.build
+.npm
+.meteor
+packages
+.DS_Store

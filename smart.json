@@ -1,0 +1,13 @@
+{
+  "name": "meteor-bird",
+  "description": "Meteor Bird",
+  "author": "Caio R. Pereira <caio.ribeiro.pereira@gmail.com>",
+  "version": "0.0.1",
+  "packages": {
+    "accounts-ui-bootstrap-3": {},
+    "bootstrap-3": {},
+    "iron-router": {},
+    "fast-render": {},
+    "npm": {}
+  }
+}

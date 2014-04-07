@@ -3,3 +3,4 @@
 .meteor
 packages
 .DS_Store
+.demeteorized

@@ -8,8 +8,8 @@ Meteor.methods({
 			}}
 		);
 	},
-	publishPost: function(message) {
-		Post.publish(message);
+	publishPost: function(message, name) {
+		Post.publish(message, name);
 	},
 	followUser: function(friendId) {
 		Friendship.follow(friendId);

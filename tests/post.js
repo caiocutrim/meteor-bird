@@ -5,10 +5,6 @@ suite("Post", function() {
 	test("publish", function(done, srv, cli) {
 		
 		srv.eval(function() {
-			Accounts.createUser({
-				email: "a@a.com",
-				password: "123456"
-			});
 			Post.find().observe({
 				added: function(obj) {
 					emit("added", obj);
@@ -22,8 +18,34 @@ suite("Post", function() {
 		});
 
 		cli.eval(function() {
-			Meteor.loginWithPassword("a@a.com","123456", function() {
-				Meteor.call("publishPost", "Hello!");
+			Meteor.call("publishPost", "Hello!");
+		});
+
+	});
+
+	test("list", function(done, srv, cli) {
+		
+		srv.eval(function() {
+			Post.find().observe({
+				addedAt: function(obj, index, before) {
+					if (index == 1) {
+						var posts = Post.list([this.userId]);
+						emit("listed", posts.fetch());
+					}
+				}
+			});
+		});
+
+		srv.once("listed", function(posts) {
+			assert.equal(posts.length, 2);
+			assert.equal(posts[0].message, "Bye!");
+			assert.equal(posts[1].message, "Ola!");
+			done();
+		});
+
+		cli.eval(function() {
+			Meteor.call("publishPost", "Ola!", function() {
+				Meteor.call("publishPost", "Bye!");
 			});
 		});
 

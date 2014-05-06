@@ -1,12 +1,11 @@
-Router.configure({
-  autoRender: false
-});
-
 Router.map(function() {
 
 	this.route('home', {
 		path: '/',
-		before: function() {
+		template: 'home',
+		layoutTemplate: 'layout',
+		fastRender: true,
+		onBeforeAction: function() {
 			var _id = Meteor.userId();
 			this.subscribe("posts", _id);
 			this.subscribe("friendship", _id);
@@ -18,13 +17,15 @@ Router.map(function() {
 				followers: Friendship.followers(_id),
 				followings: Friendship.followings(_id)
 			}
-		},
-		fastRender: true
+		}
 	});
 
 	this.route('user', {
 		path: '/user/:_id',
-		before: function() {
+		template: 'user',
+		layoutTemplate: 'layout',
+		fastRender: true,
+		onBeforeAction: function() {
 			var _id = this.params._id;
 			this.subscribe("posts", _id);
 			this.subscribe("friendship", _id);
@@ -42,8 +43,7 @@ Router.map(function() {
 				followers: Friendship.followers(_id),
 				followings: Friendship.followings(_id)
 			}
-		},
-		fastRender: true
+		}
 	});
 
 	this.route('follow', {

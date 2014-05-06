@@ -1,5 +1,7 @@
 {
-	"FB_SERVICE": "facebook",
 	"FB_APPID": "",
-	"FB_SECRET": ""
+	"FB_SECRET": "",
+	"public": {
+		"FB_SERVICE": "facebook"
+	}
 }

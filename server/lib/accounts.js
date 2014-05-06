@@ -4,6 +4,8 @@ Accounts.onCreateUser(function(options, user) {
 		user['profile'] = {
 			name: facebook.name
 		};
+	} else {
+  	user['profile'] = options.profile;
 	}
 	return user;
 });

@@ -26,7 +26,7 @@ Friendship.isFollowing = function(friendId) {
 };
 
 Friendship.timelineIds = function(userId) {
-	var timelineIds = this.find({
+	var timelineIds = this.findFaster({
 		userId: userId
 	}).map(function(f) {
 		return f.friendId;
@@ -36,7 +36,7 @@ Friendship.timelineIds = function(userId) {
 };
 
 Friendship.followersAndFollowings = function(_id) {
-	return this.find({$or: [{userId: _id}, {friendId: _id}]});
+	return this.findFaster({$or: [{userId: _id}, {friendId: _id}]});
 };
 
 Friendship.followings = function(userId) {
